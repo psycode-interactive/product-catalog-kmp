@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">productcatalog</string>
+    <string name="failure">Failure\n</string>
+    <string name="search_product">Search product</string>
+    <string name="no_results">No results</string>
+    <string name="empty">Empty</string>
+    <string name="favorites">Favorites</string>
+    <string name="product_details">Product details</string>
+    <string name="price">Price:</string>
+</resources>
