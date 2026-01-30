@@ -2,6 +2,7 @@ Product Catalog KMP app
 
 - Clean architecture
 - Shared KMP modules for data, domain, presentation and app
+- androidApp module contains ui
 - Lightweight MVI
 - Ktor for client networking, consuming dummyjson.com API
 - Room for persistence of favorite products
