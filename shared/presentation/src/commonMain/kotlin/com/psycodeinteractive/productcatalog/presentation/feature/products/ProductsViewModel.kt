@@ -143,7 +143,7 @@ class ProductsViewModel(
     }
 
     private fun onSearchCompleted(
-        currentState: ProductsViewState = viewState.value,
+        currentState: ProductsViewState,
         event: SearchCompleted
     ): ProductsViewState {
         return (currentState as Search).copy(
