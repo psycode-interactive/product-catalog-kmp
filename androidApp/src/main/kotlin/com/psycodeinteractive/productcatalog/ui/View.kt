@@ -1,19 +1,21 @@
 package com.psycodeinteractive.productcatalog.ui
-import androidx.compose.runtime.*
-import androidx.lifecycle.*
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Lifecycle.State.STARTED
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.CreationExtras
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.psycodeinteractive.productcatalog.presentation.BaseViewModel
 import com.psycodeinteractive.productcatalog.presentation.ViewEvent
 import com.psycodeinteractive.productcatalog.presentation.ViewSideEffect
 import com.psycodeinteractive.productcatalog.presentation.ViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlin.reflect.KClass
-import androidx.lifecycle.viewmodel.compose.viewModel as viewModelCompose
 
 @Composable
 inline fun <reified VM : BaseViewModel<State, Event, SideEffect>,
@@ -58,26 +60,6 @@ data class ScreenScope<VM : BaseViewModel<State, Event, SideEffect>,
         viewModel.processEvent(event)
     }
 }
-
-@Composable
-inline fun <reified VM : ViewModel> viewModel(
-    viewModelStoreOwner: ViewModelStoreOwner = requireNotNull(LocalViewModelStoreOwner.current) {
-        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
-    },
-    key: String? = null,
-    crossinline factory: () -> VM,
-): VM = viewModelCompose(
-    viewModelStoreOwner = viewModelStoreOwner,
-    key = key,
-    factory = object : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <VM : ViewModel> create(
-            modelClass: KClass<VM>,
-            extras: CreationExtras,
-        ) = factory() as VM
-    }
-)
-
 
 @Composable
 fun OnLifecycle(
